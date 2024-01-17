@@ -21,17 +21,17 @@ def best_school_in_town(city: str, school_level: str, df):
 
     filtered_data = df[(df['Denominazione Comune'].str.lower() == city.lower()) &
                        (df['Tipologia Scuola'].str.lower() == school_level.lower())]
-    
+
     if filtered_data.empty:
         return None
 
     # Calcola il numero di servizi per ciascuna scuola
-    filtered_data['Service Count'] = filtered_data[['Spazi Didattici', 'Auditorium Aula Magna',
+    filtered_data.loc[:, ['Service Count']] = filtered_data[['Spazi Didattici', 'Auditorium Aula Magna',
                                                     'Mensa', 'Palestra Piscina', 'Spazi Amministrativi']].sum(axis=1)
-    
+
     # Ordina le scuole in base al numero di servizi
     filtered_data = filtered_data.sort_values(by='Service Count', ascending=False)
-    
+
     best_schools = filtered_data[filtered_data['Service Count'] == filtered_data.iloc[0]['Service Count']]
 
     return best_schools
