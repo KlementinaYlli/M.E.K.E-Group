@@ -41,8 +41,9 @@ Service Evaluation: It then evaluates the schools based on the number of service
 
 Result Presentation: The output is a dictionary containing key information about the best school, such as the school's name, the services it offers, and the total count of these services.
 
-#feature 3
-
+**#Feature 3**
+The function school_by_province, allows you to view the list of schools in a specific province, by simply typing your province of interest.
+This function can be useful for many targets, from educators, governement services, to indivudual or families relocating, in their planning, research or relocation process.
 
 
 
