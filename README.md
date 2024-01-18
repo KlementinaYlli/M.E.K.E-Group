@@ -6,9 +6,9 @@ M.e.k.e software projectfor the Lab of Software porject development exam.
 
 -Akenten Princess Emmanuela Adomah 891924 
 
-*Favero Elisa 890183 
+-Favero Elisa 890183 
 
-+Gatto Marco 891185
+-Gatto Marco 891185
 
 -Ylli Klementina 888981
 
@@ -73,7 +73,8 @@ This function can be useful for many targets, from educators, governement servic
 
 The function goes through the dataset, and takes into accout only the schools located in the the province required.
 
-> [!TIP] **How to use and start the M.E.K.E Software**
+> [!TIP]
+>**How to use and start the M.E.K.E Software**
 
 ***Preparation***
 Ensure that the necessary dataset ('name_of_your_file.csv') is present in the backend part. It is essential for the software's operation.
@@ -88,7 +89,8 @@ In order to start the software you need to follow the following steps:
 1. After starting the debugger you should have access to the adress localhost:8080.
 
 
-> [!WARNING] ***Troubleshooting***
+> [!WARNING]
+>***Troubleshooting***
 If you encounter issues in launching the application (for example, CSV file formatting errors), check the backend's status and, if necessary, reload the CSV file.
 
 ***Navigating the Interface***
