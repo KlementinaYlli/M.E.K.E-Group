@@ -45,6 +45,19 @@ Result Presentation: The output is a dictionary containing key information about
 The function school_by_province, allows you to view the list of schools in a specific province, by simply typing your province of interest.
 This function can be useful for many targets, from educators, governement services, to indivudual or families relocating, in their planning, research or relocation process.
 
+Functionality:
+The function goes through the dataset, and takes into accout only the schools located in the the province required.
+
+
+#How to start the M.E.K.E Software
+In order to start the software you need to follow the following steps:
+
+-Open the folder of the repository on Visual Studio code.
+-From the terminal on your PC run the command 'docker compose build'.This command will install the necessary Docker images for the software.
+-Open the docker icon on VS code and run the containers.
+-Right-click on a container and select "Attach VSCode". Open the /app folder inside the container.
+-Make sure that you have alraedy installed the necessary estension, go to the debug section and press start.
+-After starting the debugger you should gìhave access to the adress localhost:8080.
 
 
 #How to Use the M.E.K.E Software
