@@ -7,8 +7,6 @@ as the backend for the project.
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from datetime import datetime
-import pandas as pd
 
 from .mymodules.search_with_province import schools_by_province
 from .mymodules.best_school import best_school_in_town
@@ -19,14 +17,17 @@ from .mymodules import listing
 
 app = FastAPI()
 
-# Lettura del csv, si usa sep=';' poiche' questo file usa come separatore
-# il punto e virgola e non la virgola.
+# Reading csv.
 veneto = load_and_clean_data('/app/app/veneto.csv')
+
 
 @app.get('/all/{type}')
 def list_all(type: str):
     """
-    Endpoint to query all available provinces.
+    Endpoint to obtain a list of a specified field.
+
+    Args:
+        type (str): field name.
 
     Returns:
         dict: Available provinces.

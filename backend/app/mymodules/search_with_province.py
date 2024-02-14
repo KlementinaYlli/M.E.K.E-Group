@@ -1,13 +1,28 @@
+"""
+Schools by province module.
+
+Contains search by province feature.
+"""
+
+
 import json
 
+
 def schools_by_province(province: str, df):
+    """
+    Find the schools in the specified province.
 
-    # Query per ricercare all'interno del csv tutti gli elementi che hanno
-    # denominazione provincia = province (parametro passato in input)
+    Args:
+        province_name (str): province name
+        df (Dataframe): dataframe contaning data
 
-    # Eseguo la query e formatto l'output. Faccio la trasposta della
-    # tabella, in modo da avere un output comodo da utilizzare.
+    Returns:
+        dict: dictionary that contains the specified result as json
+    """
+
+    # Run the query and format the output. I do the transposition of the
+    # table, so as to have a convenient output to use.
     result = df[df['Denominazione Provincia'].str.lower() == province.lower()].transpose()
 
-    # Ritorno un json con i dati formattati.
-    return { 'result': json.loads(result.to_json()) }
+    # Return a json with the formatted data.
+    return {'result': json.loads(result.to_json())}
