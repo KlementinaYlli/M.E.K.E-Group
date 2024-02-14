@@ -18,6 +18,3 @@ EXPOSE 80
 # Command to run the application
 # Will be served with waitress
 CMD ["python", "app/main.py"]
-
-# Command to keep the container running
-#CMD ["tail", "-f", "/dev/null"]

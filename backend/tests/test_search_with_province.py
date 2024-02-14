@@ -16,12 +16,25 @@ pytest --cov=app --cov-report=html tests/
 client = TestClient(app)
 
 def test_search_valid():
+    """
+    Tests a valid request to the backend.
+
+    Checks the status code and the quality of the response.
+    In particular it should be not empty and should be able to successfully convert to json.
+    """
+
     response = client.get("/module/search/province/treviso")
     assert response.status_code == 200
     assert response is not None
     assert len(response.json()['result']) != 0
     
 def test_search_empty():
+    """
+    Tests an empty request to the backend.
+
+    Checks the status code and that no results are returned.
+    """
+
     # Conegliano is not a province
     response = client.get("/module/search/province/conegliano")
     assert response.status_code == 200
@@ -29,7 +42,15 @@ def test_search_empty():
     assert len(response.json()['result']) == 0
     
 def test_search_edge():
-    # Conegliano is not a province
+    """
+    Tests an invalid request to the backend.
+
+    Checks the status code and verifies that the no valid result is found.
+    Even if the request was bad, it still should be able to convert to json.
+    In this case an empty result is returned.
+    """
+
+    # Invalid input
     response = client.get("/module/search/province/gse24##=")
     assert response.status_code == 200
     assert response is not None

@@ -50,11 +50,12 @@ def index():
 @app.route('/school-by-province', methods=['GET', 'POST'])
 def school_by_province():
     """
-    Render the internal page.
+    Render shool by province.
 
     Returns:
         str: Rendered HTML content search school by province page.
     """
+
     form = ScoolbyProvince()
     form.province.choices = make_tuples(list('provinces'))
 
@@ -74,7 +75,6 @@ def school_by_province():
             return render_template('school_by_province.html', form=form, result=result, error_message=error_message)
         else:
             error_message = f'Error: Unable to fetch province for {province} from FastAPI Backend'
-
     return render_template('school_by_province.html', form=form, result=None, error_message=error_message)
 
 
@@ -86,6 +86,7 @@ def best_school():
     Returns:
         str: Rendered HTML content best school section.
     """
+
     form = BestSchoolForm()
 
     cities = list('cities')
@@ -111,7 +112,6 @@ def best_school():
             return render_template('best_school.html', form=form, result=result, error_message=error_message)
         else:
             error_message = f'Error: Unable to fetch'
-
     return render_template('best_school.html', form=form, result=None, error_message=error_message)
 
 
@@ -123,6 +123,7 @@ def shool_with_infrastructures():
     Returns:
         str: Rendered HTML content best school with infrastructures section.
     """
+
     form = SchoolInfrastructuresForm()
     provinces = list('provinces')
     form.province.choices = make_tuples(provinces)
@@ -173,6 +174,16 @@ def list(element):
 
 
 def make_tuples(element):
+    """
+    Given a list of elements it returns a tuple with key and value the same element.
+
+	Args:
+        element (list): list of elements
+
+    Returns:
+        list: list of tuples with the format (value, value) for each element of the list
+    """
+
     result = []
     for x in element:
         result.append((x, x))
