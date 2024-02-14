@@ -15,6 +15,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 80
 
 # Command to run the application
-#CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80", "--reload"]
+# Removed --reload for deployment
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 # Command to keep the container running
-CMD ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]

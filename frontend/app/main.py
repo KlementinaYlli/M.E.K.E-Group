@@ -8,9 +8,10 @@ from flask import Flask, render_template
 import requests  # Import the requests library to make HTTP requests
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
+from waitress import serve
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with a secure secret key
+app.config['SECRET_KEY'] = 'XSURO8{_udYm4!o>P/?O1TSj-Lw{6!miEyZzdD*#2i5xKA3(G>spItjSPdMc[0R'  # Replace with a secure secret key
 
 # Configuration for the FastAPI backend URL
 FASTAPI_BACKEND_HOST = 'http://backend'  # Replace with the actual URL of your FastAPI backend
@@ -21,17 +22,18 @@ class ScoolbyProvince(FlaskForm):
     province = SelectField('Province:', choices=[])
     submit = SubmitField('Get all schools')
 
+
 class BestSchoolForm(FlaskForm):
     city = SelectField('City:', choices=[])
     type = SelectField('Type:', choices=[])
-    
     submit = SubmitField('Get best school')
-    
+
+
 class SchoolInfrastructuresForm(FlaskForm):
     province = SelectField('Province:', choices=[])
     infrastructure = SelectField('Infrastructures:', choices=[])
-    
     submit = SubmitField('Get all schools')
+
 
 @app.route('/')
 def index():
@@ -55,7 +57,7 @@ def school_by_province():
     """
     form = ScoolbyProvince()
     form.province.choices = make_tuples(list('provinces'))
-    
+
     error_message = None  # Initialize error message
 
     if form.validate_on_submit():
@@ -85,19 +87,19 @@ def best_school():
         str: Rendered HTML content best school section.
     """
     form = BestSchoolForm()
-    
+
     cities = list('cities')
     types = list('school_types')
 
     form.city.choices = make_tuples(cities)
     form.type.choices = make_tuples(types)
-    
+
     error_message = None  # Initialize error message
 
     if form.validate_on_submit():
         city = form.city.data
         type = form.type.data
-        
+
         # Make a GET request to the FastAPI backend
         fastapi_url = f'{FASTAPI_BACKEND_HOST}/module/search/rank/{city}/{type}'
         response = requests.get(fastapi_url)
@@ -105,7 +107,6 @@ def best_school():
         if response.status_code == 200:
             # Extract and display the result from the FastAPI backend
             data = response.json()
-            
             result = data.get('result', [])
             return render_template('best_school.html', form=form, result=result, error_message=error_message)
         else:
@@ -123,9 +124,7 @@ def shool_with_infrastructures():
         str: Rendered HTML content best school with infrastructures section.
     """
     form = SchoolInfrastructuresForm()
-    
     provinces = list('provinces')
-
     form.province.choices = make_tuples(provinces)
     form.infrastructure.choices = [
         ("Spazi Didattici", "Spazi Didattici"),
@@ -133,14 +132,14 @@ def shool_with_infrastructures():
         ("Mensa", "Mensa"),
         ("Palestra Piscina", "Palestra Piscina"),
         ("Spazi Amministrativi", "Spazi Amministrativi")
-	]
-    
+    ]
+
     error_message = None  # Initialize error message
 
     if form.validate_on_submit():
         province = form.province.data
         infrastructure = form.infrastructure.data
-        
+
         # Make a GET request to the FastAPI backend
         fastapi_url = f'{FASTAPI_BACKEND_HOST}/module/search/infrastructure/{province}/{infrastructure}'
         response = requests.get(fastapi_url)
@@ -148,13 +147,13 @@ def shool_with_infrastructures():
         if response.status_code == 200:
             # Extract and display the result from the FastAPI backend
             data = response.json()
-            
             result = data.get('result', [])
             return render_template('school_with_infrastructures.html', form=form, result=result, error_message=error_message)
         else:
             error_message = f'Error: Unable to fetch'
 
     return render_template('school_with_infrastructures.html', form=form, result=None, error_message=error_message)
+
 
 def list(element):
     """
@@ -180,4 +179,6 @@ def make_tuples(element):
     return result
 
 
-if __name__ == '__main__':    app.run(host='0.0.0.0', port=80, debug=True)
+if __name__ == '__main__':
+    # Serving with WSGI
+    serve(app, host='0.0.0.0', port=80)
