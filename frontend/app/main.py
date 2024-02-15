@@ -177,7 +177,7 @@ def make_tuples(element):
     """
     Given a list of elements it returns a tuple with key and value the same element.
 
-	Args:
+    Args:
         element (list): list of elements
 
     Returns:
