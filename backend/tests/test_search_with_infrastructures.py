@@ -54,3 +54,8 @@ def test_search_edge():
     assert response.status_code == 200
     assert response.json() == {'error': "Unable to find school"}
     
+	# Invalid input province (does not exist)
+    response = client.get("/module/search/infrastructure/conegliano/awfffgerg##=")
+    assert response.status_code == 200
+    assert response.json() == {'error': "Unable to find school"}
+    
